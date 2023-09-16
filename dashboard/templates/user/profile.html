@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Hello
+{% if user.is_authenticated %}
+welcome {{user.username}}
+{% else %}
+1
+you need to be logged in to get here
+
+{% endif %}
+{% endblock %}

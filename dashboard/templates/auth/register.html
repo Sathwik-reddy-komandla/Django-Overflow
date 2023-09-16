@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<center>
+    <h4 class="text-primary">Register With Us</h4>
+</center>
+<br>
+<div id="errors">
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  
+  {% endfor %}
+  {% endif %}
+  
+</div>
+
+<form id="myForm" method="POST" action="">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="FirstName" name="firstname" required>
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="LastName" name="lastname" required>
+      </div>
+      <div class="mb-3">
+      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="UserName" name="username" required>
+    </div>
+    <div class="mb-3">
+      <input type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Email Address" name="email" required>
+    </div>
+    <div class="mb-3">
+      <input type="password" required class="form-control"  placeholder="Create Password" name="password" id="password">
+    </div>
+    
+    <div class="mb-3">
+        <input type="password" required class="form-control"  placeholder="Confirm Password" name="password2" id="password2">
+      </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+ 
+
+<script>
+  // Capture the form submission event
+  $('#myForm').on('submit', function(event) {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+    // Get the values of password and confirm password fields
+    var password = $('#password').val();
+    var confirmPassword = $('#password2').val();
+    // Check if the passwords match
+    if (password === confirmPassword) {
+      // Passwords match, submit the form
+      this.submit(); // 'this' refers to the form element
+    } else {
+      // Passwords don't match, show an error message or perform any other action
+      $('#errors').empty()
+      $('#errors').append( `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        Passwords Didnot match
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`)
+      $('#password').val('')
+      $('#password2').val('')
+    }
+  });
+</script>
+
+
+{% endblock %}
+

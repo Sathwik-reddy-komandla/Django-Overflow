@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h1>you are logged in here are your questions </h1>
+
+{% else %}
+
+<h1>Dummy questions</h1>
+
+{% endif %}
+
+{% endblock %}
